@@ -1,10 +1,6 @@
 ﻿@import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
 
-html, body {
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-}
-
-app {
+/*app {
     position: relative;
     display: flex;
     flex-direction: column;
@@ -129,18 +125,37 @@ app {
     }
 
     .sidebar .collapse {
-        /* Never collapse the sidebar for wide screens */
         display: block;
     }
+}*/
+app {
+    position: relative;
+    display: flex;
+    flex-direction: column;
 }
 
-
-.slides-container--centered{
-    text-align:center;
+html, body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: x-large;
 }
 
-    .slides-container--centered ul {
+html, body, app, .main {
+    height: 100%;
+}
+
+.slides-container--centered {
+    text-align: center;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+    .slides-container--centered ul,
+    .slides-container--centered ol {
         text-align: initial;
-        margin: auto;
+        margin-left: auto;
+        margin-right: auto;
         width: fit-content;
     }
+
