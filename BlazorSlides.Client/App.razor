@@ -1,1 +1,11 @@
-﻿<Router AppAssembly="typeof(Program).Assembly" />
+﻿@inject IInteropService interopService
+@inject IJSRuntime jsRuntime
+
+<Router AppAssembly="typeof(Program).Assembly" />
+
+@functions{
+    protected override async Task OnAfterRenderAsync()
+    {
+        await jsRuntime.InvokeAsync<object>("SetInteropServiceReference", new DotNetObjectRef(interopService));
+    }
+}

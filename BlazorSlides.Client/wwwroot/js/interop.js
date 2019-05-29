@@ -1,9 +1,9 @@
 ﻿
-var containerReference;
-function SetContainterInstance(containerRef) {
-    containerReference = containerRef;
+var interopServiceReference;
+function SetInteropServiceReference(dotnetReference) {
+    interopServiceReference = dotnetReference;
 }
 
 document.addEventListener("keyup", function (ev) {
-    containerReference.invokeMethodAsync('InteropKeyUp', ev.keyCode);
+    interopServiceReference.invokeMethodAsync('InteropDocumentKeyUp', ev.keyCode);
 });

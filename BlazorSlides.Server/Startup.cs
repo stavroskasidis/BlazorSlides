@@ -17,8 +17,8 @@ namespace BlazorSlides.Server
             services.AddMvc().AddNewtonsoftJson();
             services.AddResponseCompression(opts =>
             {
-                opts.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(
-                    new[] { "application/octet-stream" });
+                opts.MimeTypes = ResponseCompressionDefaults.MimeTypes
+                                .Concat(new[] { "application/octet-stream" });
             });
         }
 

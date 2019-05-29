@@ -1,3 +1,60 @@
 ﻿@page "/"
+@page "/{CurrentSlide:int}"
 
-<SlidesContainer />
+@inject HttpClient httpClient
+@inject IUriHelper uriHelper
+@inject IMarkdownService markdownService
+@inject IInteropService interopService
+
+<div class="slides-container slides-container--centered">
+    @currentSlideContents
+</div>
+
+@functions{
+    [Parameter] protected int CurrentSlide { get; set; } = 1;
+    protected MarkupString currentSlideContents;
+    protected int slidesCount = 0;
+
+    protected override async Task OnInitAsync()
+    {
+        slidesCount = await httpClient.GetJsonAsync<int>("api/Slides/Count");
+        interopService.OnDocumentKeyUp += OnDocumentKeyUp;
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        await LoadCurrentSlide();
+    }
+
+    protected void OnDocumentKeyUp(int keyCode)
+    {
+        switch (keyCode)
+        {
+            case 39: //right
+            case 32: //space
+                if (CurrentSlide < slidesCount)
+                {
+                    CurrentSlide++;
+                    uriHelper.NavigateTo($"/{CurrentSlide}");
+                }
+                break;
+            case 37: //left
+                if (CurrentSlide > 1)
+                {
+                    CurrentSlide--;
+                    uriHelper.NavigateTo($"/{CurrentSlide}");
+                }
+                break;
+        }
+    }
+
+    protected async Task LoadCurrentSlide()
+    {
+        var response = await httpClient.GetAsync($"api/Slides/{CurrentSlide}");
+        if (response.StatusCode != System.Net.HttpStatusCode.NotFound)
+        {
+            currentSlideContents = (MarkupString)markdownService.MarkdownToHtml(await response.Content.ReadAsStringAsync());
+            StateHasChanged();
+        }
+    }
+}

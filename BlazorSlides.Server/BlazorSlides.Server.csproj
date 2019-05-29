@@ -12,10 +12,14 @@
   <ItemGroup>
     <None Remove="Slides\1.md" />
     <None Remove="Slides\2.md" />
+    <None Remove="Slides\3.md" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Include="Slides\1.md">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Slides\3.md">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
     <Content Include="Slides\2.md">

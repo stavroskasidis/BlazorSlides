@@ -136,11 +136,19 @@ app {
 
 html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    font-size: x-large;
+    font-size: 42px;
 }
 
 html, body, app, .main {
     height: 100%;
+}
+
+.editor-colors {
+    text-align: initial;
+    font-size: 25px;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .slides-container--centered {

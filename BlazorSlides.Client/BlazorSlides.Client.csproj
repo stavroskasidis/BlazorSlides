@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <PackageReference Include="Markdig" Version="0.17.0" />
+    <PackageReference Include="Markdig.SyntaxHighlighting" Version="1.1.7" />
     <PackageReference Include="Microsoft.AspNetCore.Blazor" Version="3.0.0-preview5-19227-01" />
     <PackageReference Include="Microsoft.AspNetCore.Blazor.Build" Version="3.0.0-preview5-19227-01" PrivateAssets="all" />
   </ItemGroup>
