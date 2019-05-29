@@ -133,3 +133,14 @@ app {
         display: block;
     }
 }
+
+
+.slides-container--centered{
+    text-align:center;
+}
+
+    .slides-container--centered ul {
+        text-align: initial;
+        margin: auto;
+        width: fit-content;
+    }

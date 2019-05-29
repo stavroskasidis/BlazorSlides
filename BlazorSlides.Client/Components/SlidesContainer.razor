@@ -2,7 +2,7 @@
 @inject IJSRuntime jsRuntime
 @using Markdig;
 
-<div class="slides-container">
+<div class="slides-container slides-container--centered">
     @currentSlideContents
 </div>
 
@@ -29,14 +29,14 @@
         switch (keyCode)
         {
             case 39: //right
-                if (currentSlide <= slidesCount)
+                if (currentSlide < slidesCount)
                 {
                     currentSlide++;
                     await LoadCurrentSlide();
                 }
                 break;
             case 37: //left
-                if (currentSlide > 0)
+                if (currentSlide > 1)
                 {
                     currentSlide--;
                     await LoadCurrentSlide();

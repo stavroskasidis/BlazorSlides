@@ -31,7 +31,7 @@ namespace BlazorSlides.Server.Controllers
 
             return File(System.IO.File.OpenRead(filePath), "application/text");
         }
-        [HttpGet("/Count")]
+        [HttpGet("Count")]
         public int Count()
         {
             var slidesFolder = Path.Combine(hostEnvironment.ContentRootPath, "Slides");
