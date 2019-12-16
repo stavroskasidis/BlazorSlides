@@ -1,11 +1,24 @@
 ﻿@inject IInteropService interopService
 @inject IJSRuntime jsRuntime
 
-<Router AppAssembly="typeof(Program).Assembly" />
+<Router AppAssembly="@typeof(Program).Assembly">
+    <Found Context="routeData">
+        <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
+    </Found>
+    <NotFound>
+        <LayoutView Layout="@typeof(MainLayout)">
+            <p>Sorry, there's nothing at this address.</p>
+        </LayoutView>
+    </NotFound>
+</Router>
+
 
 @functions{
-    protected override async Task OnAfterRenderAsync()
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        await jsRuntime.InvokeAsync<object>("SetInteropServiceReference", new DotNetObjectRef(interopService));
+        if (firstRender)
+        {
+            await jsRuntime.InvokeAsync<object>("SetInteropServiceReference", DotNetObjectReference.Create(interopService));
+        }
     }
 }

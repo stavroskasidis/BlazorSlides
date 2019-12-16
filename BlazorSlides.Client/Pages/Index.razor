@@ -2,7 +2,7 @@
 @page "/{CurrentSlide:int}"
 
 @inject HttpClient httpClient
-@inject IUriHelper uriHelper
+@inject NavigationManager navigationManager
 @inject IMarkdownService markdownService
 @inject IInteropService interopService
 
@@ -11,11 +11,11 @@
 </div>
 
 @functions{
-    [Parameter] protected int CurrentSlide { get; set; } = 1;
+    [Parameter] public int CurrentSlide { get; set; }
     protected MarkupString currentSlideContents;
     protected int slidesCount = 0;
 
-    protected override async Task OnInitAsync()
+    protected override async Task OnInitializedAsync()
     {
         slidesCount = await httpClient.GetJsonAsync<int>("api/Slides/Count");
         interopService.OnDocumentKeyUp += OnDocumentKeyUp;
@@ -23,6 +23,11 @@
 
     protected override async Task OnParametersSetAsync()
     {
+        if(CurrentSlide == 0)
+        {
+            CurrentSlide = 1;
+        }
+        
         await LoadCurrentSlide();
     }
 
@@ -35,14 +40,14 @@
                 if (CurrentSlide < slidesCount)
                 {
                     CurrentSlide++;
-                    uriHelper.NavigateTo($"/{CurrentSlide}");
+                    navigationManager.NavigateTo($"/{CurrentSlide}");
                 }
                 break;
             case 37: //left
                 if (CurrentSlide > 1)
                 {
                     CurrentSlide--;
-                    uriHelper.NavigateTo($"/{CurrentSlide}");
+                    navigationManager.NavigateTo($"/{CurrentSlide}");
                 }
                 break;
         }
